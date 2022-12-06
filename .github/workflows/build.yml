@@ -21,4 +21,4 @@ jobs:
       - name: Perl check version
         run: echo "PERL_VERSION=$(docker run --rm $IMAGE  /app/perl/bin/perl -V | awk ' NR == 1 { gsub(/[()]/, \"\"); print $6\".\"$8\".\"$10 } ')" >> $GITHUB_ENV
       - name: Add tag & push
-        run: docker tag $IMAGE $IMAGE:$REDIS_VERSION && docker push $IMAGE:$REDIS_VERSION && docker push $IMAGE
+        run: docker tag $IMAGE $IMAGE:$PERL_VERSION && docker push $IMAGE:$PERL_VERSION && docker push $IMAGE
