@@ -1,6 +1,7 @@
 ARG PROFILE=perl
 
 FROM ghcr.io/dellelce/mkit-base as build
+ARG PROFILE
 
 RUN ./mkit.sh profile=$PROFILE /app/$PROFILE
 
