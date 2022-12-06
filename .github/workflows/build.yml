@@ -19,6 +19,8 @@ jobs:
       - name: Mkit Perl 
         run: docker build -t $IMAGE .
       - name: Perl check version
-        run: echo "PERL_VERSION=$(docker run --rm $IMAGE  /app/perl/bin/perl -V | awk ' NR == 1 { gsub(/[()]/, \"\"); print $6\".\"$8\".\"$10 } ')" >> $GITHUB_ENV
+        run: |
+              PERL_VERSION=$(docker run --rm $IMAGE  /app/perl/bin/perl -V | awk ' NR == 1 { gsub(/[()]/, ""); print $6"."$8"."$10; } ')
+              echo "PERL_VERSION=$PERL_VERSION" >> $GITHUB_ENV
       - name: Add tag & push
         run: docker tag $IMAGE $IMAGE:$PERL_VERSION && docker push $IMAGE:$PERL_VERSION && docker push $IMAGE
